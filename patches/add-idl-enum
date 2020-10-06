@@ -1,0 +1,37 @@
+Index: SERVER-50758-fcv-refactor-design/fcv_components/fcv_components.gv
+===================================================================
+--- SERVER-50758-fcv-refactor-design.orig/fcv_components/fcv_components.gv
++++ SERVER-50758-fcv-refactor-design/fcv_components/fcv_components.gv
+@@ -14,6 +14,14 @@ fontsize = "16";
+ labeljust = "left";
+ ];
+ 
++multiversion_constants_idl [
++label = "multiversion_constants.idl\lallVersions\:\l-\ k44\l-\ k47\l-\ k48\l-\ k49\lallowedVersions\:\l-\ kLastLTS\l-\ kLastContinuous\l-\ kLatest\l"
++];
++
++fcv_transitions [
++label = "FCV transition table";
++];
++
+ FeatureCompatibility [
+ label = "struct ServerGlobalParams\:\:FeatureCompatibility\lenums\:\l-\ kLatest\l-\ kLastContinuous\l-\ kLastLTS\l-\ kUpgradingFromLastLTSToLatest\l-\ kUpgradingFromLastContinuousToLatest\l-\ kDowngradingFromLatestToLastLTS\l-\ kDowngradingFromLatestToLastContinuous\l-\ kUpgradingFromLastLTSToLastContinuous\l-\ _version\l-\ getVersion → enum\l-\ isGreater/LessThanOrEqualTo, etc\l-\ "
+ ];
+@@ -59,6 +67,7 @@ validateUpgradeRequest [
+ label = "validateUpgradeRequest"
+ ];
+ 
++fcv_transitions -> multiversion_constants_idl [label = "generated from"];
+ getFcvDocTargetVersionField -> FeatureCompatibility [label = "uses"];
+ getFcvDocVersionField -> FeatureCompatibility [label = "uses"];
+ FeatureCompatibility -> FeatureCompatibilityVersionEnum [label = "has a"];
+@@ -72,7 +81,7 @@ SetFeatureCompatibilityVersionCommand ->
+ SetFeatureCompatibilityVersionCommand -> validateUpgradeRequest [label = "calls"];
+ SetFeatureCompatibilityVersionCommand -> FeatureCompatibilityVersionParser;
+ SetFeatureCompatibilityVersionCommand -> FeatureCompatibilityVersion;
+-validateDowngradeRequest -> FeatureCompatibility [label = "uses"];
+-validateUpgradeRequest -> FeatureCompatibility [label = "uses"];
++validateDowngradeRequest -> fcv_transitions [label = "uses"];
++validateUpgradeRequest -> fcv_transitions [label = "uses"];
+ FeatureCompatibilityVersionDocument -> fcv_string;
+ };
