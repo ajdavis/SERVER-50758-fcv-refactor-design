@@ -1,0 +1,78 @@
+digraph g {
+graph [
+rankdir = "LR";
+];
+node [
+fontsize = "16";
+labeljust = "left";
+shape = "record";
+style = "filled";
+fillcolor = "white";
+];
+edge [
+fontsize = "16";
+labeljust = "left";
+];
+
+FeatureCompatibility [
+label = "struct ServerGlobalParams\:\:FeatureCompatibility\l|enums\:\l|kLatest\l|kLastContinuous\l|kLastLTS\l|kUpgradingFromLastLTSToLatest\l|kUpgradingFromLastContinuousToLatest\l|kDowngradingFromLatestToLastLTS\l|kDowngradingFromLatestToLastContinuous\l|kUpgradingFromLastLTSToLastContinuous\l|_version\l|getVersion → enum\l|isGreater/LessThanOrEqualTo, etc\l"
+];
+
+FeatureCompatibilityVersionEnum [
+label = "enum ServerGlobalParams\:\:FeatureCompatibility\:\:Version\l|kInvalid\l|kUnsetDefault44Behavior\l|kFullyDowngradedTo44\l|kDowngradingFrom47To44\l|kDowngradingFrom48To44\l|kUpgradingFrom44To47\l|kUpgradingFrom44To48\l|kVersion47\l|kDowngradingFrom48To47\l|kUpgradingFrom47To48\l|kVersion48\l"
+];
+
+
+FeatureCompatibilityVersionDocument [
+label = "struct FeatureCompatibilityVersionDocument (from IDL)|_id\l|version\l|targetVersion\l|previousVersion\l"
+];
+
+FeatureCompatibilityVersionParser [
+label = "class FeatureCompatibilityVersionParser|(convert between string and enum)\l|strings\:\l|kVersion44\l|kVersion47\l|kVersion48\l|kVersionDowngradingFrom47To44\l|kVersionDowngradingFrom48To44\l|kVersionDowngradingFrom48To47\l|kVersionUpgradingFrom44To47\l|kVersionUpgradingFrom47To48\l|kVersionUpgradingFrom44To48\l|kVersionUnset\l|kParameterName\l|kLastLTS\l|kLastContinuous\l|kLatest\l|kUpgradingFromLastLTSToLatest\l|kUpgradingFromLastContinuousToLatest\l|kVersionUpgradingFromLastLTSToLastContinuous\l|kDowngradingFromLatestToLastLTS\l|kDowngradingFromLatestToLastContinuous\l|parseVersion: string → enum\l|serializeVersion: enum → string\l|validatePreviousVersionField → bool\l"
+];
+
+FeatureCompatibilityVersion [
+label = "FeatureCompatibilityVersion|(convert between document and enum)\l|fcvLock\l|set/unsetTargetUpgrade/DowngradeFrom: enum → void\l"
+];
+
+getFcvDocTargetVersionField [
+label = "getFcvDocTargetVersionField → enum"
+];
+
+getFcvDocVersionField [
+label = "getFcvDocVersionField → enum"
+];
+
+fcv_string [
+label = "fcv_string \(IDL basic type\)"
+];
+
+SetFeatureCompatibilityVersionCommand [
+label = "SetFeatureCompatibilityVersionCommand"
+];
+
+validateDowngradeRequest [
+label = "validateDowngradeRequest"
+];
+
+validateUpgradeRequest [
+label = "validateUpgradeRequest"
+];
+
+getFcvDocTargetVersionField -> FeatureCompatibility [label = "uses"];
+getFcvDocVersionField -> FeatureCompatibility [label = "uses"];
+FeatureCompatibility -> FeatureCompatibilityVersionEnum [label = "has a"];
+FeatureCompatibilityVersion -> FeatureCompatibilityVersionEnum [label = "uses"];
+FeatureCompatibilityVersion -> FeatureCompatibilityVersionDocument [label = "uses"];
+FeatureCompatibilityVersion -> getFcvDocVersionField;
+FeatureCompatibilityVersion -> getFcvDocTargetVersionField;
+FeatureCompatibilityVersionDocument -> FeatureCompatibilityVersionEnum [label = "uses"];
+fcv_string -> FeatureCompatibilityVersionParser [label = "uses"];
+SetFeatureCompatibilityVersionCommand -> validateDowngradeRequest [label = "calls"];
+SetFeatureCompatibilityVersionCommand -> validateUpgradeRequest [label = "calls"];
+SetFeatureCompatibilityVersionCommand -> FeatureCompatibilityVersionParser;
+SetFeatureCompatibilityVersionCommand -> FeatureCompatibilityVersion;
+validateDowngradeRequest -> FeatureCompatibility [label = "uses"];
+validateUpgradeRequest -> FeatureCompatibility [label = "uses"];
+FeatureCompatibilityVersionDocument -> fcv_string;
+};
