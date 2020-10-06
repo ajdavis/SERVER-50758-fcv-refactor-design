@@ -1,0 +1,21 @@
+Index: SERVER-50758-fcv-refactor-design/fcv_components/fcv_components.gv
+===================================================================
+--- SERVER-50758-fcv-refactor-design.orig/fcv_components/fcv_components.gv
++++ SERVER-50758-fcv-refactor-design/fcv_components/fcv_components.gv
+@@ -36,7 +36,7 @@ label = "struct FeatureCompatibilityVers
+ ];
+ 
+ FeatureCompatibilityVersionParser [
+-label = "class FeatureCompatibilityVersionParser\l-\ (convert between string and enum)\l-\ strings\:\l-\ kVersion44\l-\ kVersion47\l-\ kVersion48\l-\ kVersionDowngradingFrom47To44\l-\ kVersionDowngradingFrom48To44\l-\ kVersionDowngradingFrom48To47\l-\ kVersionUpgradingFrom44To47\l-\ kVersionUpgradingFrom47To48\l-\ kVersionUpgradingFrom44To48\l-\ kVersionUnset\l-\ kParameterName\l-\ kLastLTS\l-\ kLastContinuous\l-\ kLatest\l-\ kUpgradingFromLastLTSToLatest\l-\ kUpgradingFromLastContinuousToLatest\l-\ kVersionUpgradingFromLastLTSToLastContinuous\l-\ kDowngradingFromLatestToLastLTS\l-\ kDowngradingFromLatestToLastContinuous\l-\ parseVersion: string → enum\l-\ serializeVersion: enum → string\l-\ validatePreviousVersionField → bool\l-\ "
++label = "class FeatureCompatibilityVersionParser\l-\ getLastLTS→ string\l-\ getLastContinuous→ string\l-\ getLatest→ string\l-\ getUpgradingFromLastLTSToLatest→ string\l-\ getUpgradingFromLastContinuousToLatest→ string\l-\ getVersionUpgradingFromLastLTSToLastContinuous→ string\l-\ getDowngradingFromLatestToLastLTS→ string\l-\ getDowngradingFromLatestToLastContinuous→ string\l-\ parseVersion: string → enum\l-\ serializeVersion: enum → string\l-\ validatePreviousVersionField → bool\l-\ "
+ ];
+ 
+ FeatureCompatibilityVersion [
+@@ -68,6 +68,7 @@ label = "validateUpgradeRequest"
+ ];
+ 
+ fcv_transitions -> multiversion_constants_idl [label = "generated from"];
++FeatureCompatibilityVersionParser -> multiversion_constants_idl [label = "uses"];
+ getFcvDocTargetVersionField -> FeatureCompatibility [label = "uses"];
+ getFcvDocVersionField -> FeatureCompatibility [label = "uses"];
+ FeatureCompatibility -> FeatureCompatibilityVersionEnum [label = "has a"];
