@@ -1,0 +1,27 @@
+Index: SERVER-50758-fcv-refactor-design/fcv_components/fcv_components.gv
+===================================================================
+--- SERVER-50758-fcv-refactor-design.orig/fcv_components/fcv_components.gv
++++ SERVER-50758-fcv-refactor-design/fcv_components/fcv_components.gv
+@@ -22,6 +22,10 @@ MultiVersionConstants [
+ label = "MultiVersionConstants\l-\ featureCompatibilityVersions\l-\ longTermSupportReleases\l"
+ ];
+ 
++FCVTransitionTable [
++label = "FCVTransitionTable\l-\ isAllowed\l";
++];
++
+ FeatureCompatibilityVersionDocument [
+ label = "struct FeatureCompatibilityVersionDocument (from IDL)\l-\ _id\l-\ version\l-\ targetVersion\l-\ previousVersion\l-\ "
+ ];
+@@ -75,8 +79,9 @@ SetFeatureCompatibilityVersionCommand ->
+ SetFeatureCompatibilityVersionCommand -> validateUpgradeRequest [label = "calls"];
+ SetFeatureCompatibilityVersionCommand -> FeatureCompatibilityVersionParser;
+ SetFeatureCompatibilityVersionCommand -> FeatureCompatibilityVersion;
+-validateDowngradeRequest -> FeatureCompatibilityVersionParser [label = "uses"];
+-validateUpgradeRequest -> FeatureCompatibilityVersionParser [label = "uses"];
++validateDowngradeRequest -> FCVTransitionTable [label = "uses"];
++validateUpgradeRequest -> FCVTransitionTable [label = "uses"];
+ FeatureCompatibilityVersionDocument -> fcv_string;
+ wireVersion -> MultiVersionConstants;
++FCVTransitionTable -> MultiVersionConstants [label = "generated from"];
+ };

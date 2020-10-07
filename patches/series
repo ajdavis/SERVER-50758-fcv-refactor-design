@@ -1,3 +1,4 @@
 multiversion-yml
 remove-ServerGlobalParams-FeatureCompatibility-Version
 wire-version
+generate-fcv-table
