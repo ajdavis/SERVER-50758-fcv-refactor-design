@@ -75,4 +75,4 @@ SetFeatureCompatibilityVersionCommand -> FeatureCompatibilityVersion;
 validateDowngradeRequest -> FeatureCompatibility [label = "uses"];
 validateUpgradeRequest -> FeatureCompatibility [label = "uses"];
 FeatureCompatibilityVersionDocument -> fcv_string;
-};
+}

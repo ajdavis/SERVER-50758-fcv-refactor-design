@@ -18,4 +18,4 @@ Index: SERVER-50758-fcv-refactor-design/fcv_components/fcv_components.gv
  validateUpgradeRequest -> FeatureCompatibilityVersionParser [label = "uses"];
  FeatureCompatibilityVersionDocument -> fcv_string;
 +wireVersion -> MultiVersionConstants;
- };
+ }

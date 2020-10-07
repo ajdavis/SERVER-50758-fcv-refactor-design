@@ -41,4 +41,4 @@ Index: SERVER-50758-fcv-refactor-design/fcv_components/fcv_components.gv
 +validateDowngradeRequest -> FeatureCompatibilityVersionParser [label = "uses"];
 +validateUpgradeRequest -> FeatureCompatibilityVersionParser [label = "uses"];
  FeatureCompatibilityVersionDocument -> fcv_string;
- };
+ }
