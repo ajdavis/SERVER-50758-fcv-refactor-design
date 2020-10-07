@@ -15,24 +15,24 @@ labeljust = "left";
 ];
 
 FeatureCompatibility [
-label = "struct ServerGlobalParams\:\:FeatureCompatibility\lenums\:\l-\ kLatest\l-\ kLastContinuous\l-\ kLastLTS\l-\ kUpgradingFromLastLTSToLatest\l-\ kUpgradingFromLastContinuousToLatest\l-\ kDowngradingFromLatestToLastLTS\l-\ kDowngradingFromLatestToLastContinuous\l-\ kUpgradingFromLastLTSToLastContinuous\l-\ _version\l-\ getVersion → enum\l-\ isGreater/LessThanOrEqualTo, etc\l-\ "
+label = "struct ServerGlobalParams\:\:FeatureCompatibility\lenums\:\l-\ kLatest\l-\ kLastContinuous\l-\ kLastLTS\l-\ kUpgradingFromLastLTSToLatest\l-\ kUpgradingFromLastContinuousToLatest\l-\ kDowngradingFromLatestToLastLTS\l-\ kDowngradingFromLatestToLastContinuous\l-\ kUpgradingFromLastLTSToLastContinuous\l-\ _version\l-\ getVersion → enum\l-\ isGreater/LessThanOrEqualTo, etc\l"
 ];
 
 FeatureCompatibilityVersionEnum [
-label = "enum ServerGlobalParams\:\:FeatureCompatibility\:\:Version\l-\ kInvalid\l-\ kUnsetDefault44Behavior\l-\ kFullyDowngradedTo44\l-\ kDowngradingFrom47To44\l-\ kDowngradingFrom48To44\l-\ kUpgradingFrom44To47\l-\ kUpgradingFrom44To48\l-\ kVersion47\l-\ kDowngradingFrom48To47\l-\ kUpgradingFrom47To48\l-\ kVersion48\l-\ "
+label = "enum ServerGlobalParams\:\:FeatureCompatibility\:\:Version\l-\ kInvalid\l-\ kUnsetDefault44Behavior\l-\ kFullyDowngradedTo44\l-\ kDowngradingFrom47To44\l-\ kDowngradingFrom48To44\l-\ kUpgradingFrom44To47\l-\ kUpgradingFrom44To48\l-\ kVersion47\l-\ kDowngradingFrom48To47\l-\ kUpgradingFrom47To48\l-\ kVersion48\l"
 ];
 
 
 FeatureCompatibilityVersionDocument [
-label = "struct FeatureCompatibilityVersionDocument (from IDL)\l-\ _id\l-\ version\l-\ targetVersion\l-\ previousVersion\l-\ "
+label = "struct FeatureCompatibilityVersionDocument (from IDL)\l-\ _id\l-\ version\l-\ targetVersion\l-\ previousVersion\l"
 ];
 
 FeatureCompatibilityVersionParser [
-label = "class FeatureCompatibilityVersionParser\l-\ (convert between string and enum)\l-\ strings\:\l-\ kVersion44\l-\ kVersion47\l-\ kVersion48\l-\ kVersionDowngradingFrom47To44\l-\ kVersionDowngradingFrom48To44\l-\ kVersionDowngradingFrom48To47\l-\ kVersionUpgradingFrom44To47\l-\ kVersionUpgradingFrom47To48\l-\ kVersionUpgradingFrom44To48\l-\ kVersionUnset\l-\ kParameterName\l-\ kLastLTS\l-\ kLastContinuous\l-\ kLatest\l-\ kUpgradingFromLastLTSToLatest\l-\ kUpgradingFromLastContinuousToLatest\l-\ kVersionUpgradingFromLastLTSToLastContinuous\l-\ kDowngradingFromLatestToLastLTS\l-\ kDowngradingFromLatestToLastContinuous\l-\ parseVersion: string → enum\l-\ serializeVersion: enum → string\l-\ validatePreviousVersionField → bool\l-\ "
+label = "class FeatureCompatibilityVersionParser\l-\ (convert between string and enum)\l-\ strings\:\l-\ kVersion44\l-\ kVersion47\l-\ kVersion48\l-\ kVersionDowngradingFrom47To44\l-\ kVersionDowngradingFrom48To44\l-\ kVersionDowngradingFrom48To47\l-\ kVersionUpgradingFrom44To47\l-\ kVersionUpgradingFrom47To48\l-\ kVersionUpgradingFrom44To48\l-\ kVersionUnset\l-\ kParameterName\l-\ kLastLTS\l-\ kLastContinuous\l-\ kLatest\l-\ kUpgradingFromLastLTSToLatest\l-\ kUpgradingFromLastContinuousToLatest\l-\ kVersionUpgradingFromLastLTSToLastContinuous\l-\ kDowngradingFromLatestToLastLTS\l-\ kDowngradingFromLatestToLastContinuous\l-\ parseVersion: string → enum\l-\ serializeVersion: enum → string\l-\ validatePreviousVersionField → bool\l"
 ];
 
 FeatureCompatibilityVersion [
-label = "FeatureCompatibilityVersion\l(convert between document and enum)\l-\ fcvLock\l-\ set/unsetTargetUpgrade/DowngradeFrom: enum → void\l-\ "
+label = "FeatureCompatibilityVersion\l(convert between document and enum)\l-\ fcvLock\l-\ set/unsetTargetUpgrade/DowngradeFrom: enum → void\l"
 ];
 
 getFcvDocTargetVersionField [
