@@ -18,7 +18,7 @@ Index: SERVER-50758-fcv-refactor-design/fcv_components/fcv_components.gv
  FeatureCompatibilityVersionDocument [
  label = "struct FeatureCompatibilityVersionDocument (from IDL)\l-\ _id\l-\ version\l-\ targetVersion\l-\ previousVersion\l"
  ];
-@@ -69,18 +60,18 @@ label = "validateUpgradeRequest"
+@@ -69,18 +60,17 @@ label = "validateUpgradeRequest"
  
  MultiVersionConstants -> multiversion_constants_yml [label = "generated from"];
  FeatureCompatibilityVersionParser -> MultiVersionConstants [label = "uses"];
@@ -32,7 +32,6 @@ Index: SERVER-50758-fcv-refactor-design/fcv_components/fcv_components.gv
  FeatureCompatibilityVersion -> getFcvDocVersionField;
  FeatureCompatibilityVersion -> getFcvDocTargetVersionField;
 -FeatureCompatibilityVersionDocument -> FeatureCompatibilityVersionEnum [label = "uses"];
-+FeatureCompatibilityVersionDocument -> FeatureCompatibilityVersionParser [label = "uses"];
  fcv_string -> FeatureCompatibilityVersionParser [label = "uses"];
  SetFeatureCompatibilityVersionCommand -> validateDowngradeRequest [label = "calls"];
  SetFeatureCompatibilityVersionCommand -> validateUpgradeRequest [label = "calls"];

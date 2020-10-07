@@ -13,7 +13,7 @@ Index: SERVER-50758-fcv-refactor-design/fcv_components/fcv_components.gv
  MultiVersionConstants -> multiversion_constants_yml [label = "generated from"];
  FeatureCompatibilityVersionParser -> MultiVersionConstants [label = "uses"];
  getFcvDocTargetVersionField -> FeatureCompatibilityVersionParser [label = "uses"];
-@@ -74,4 +78,5 @@ SetFeatureCompatibilityVersionCommand ->
+@@ -73,4 +77,5 @@ SetFeatureCompatibilityVersionCommand ->
  validateDowngradeRequest -> FeatureCompatibilityVersionParser [label = "uses"];
  validateUpgradeRequest -> FeatureCompatibilityVersionParser [label = "uses"];
  FeatureCompatibilityVersionDocument -> fcv_string;

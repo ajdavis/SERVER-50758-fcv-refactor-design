@@ -13,7 +13,7 @@ Index: SERVER-50758-fcv-refactor-design/fcv_components/fcv_components.gv
  FeatureCompatibilityVersionDocument [
  label = "struct FeatureCompatibilityVersionDocument (from IDL)\l-\ _id\l-\ version\l-\ targetVersion\l-\ previousVersion\l"
  ];
-@@ -75,8 +79,9 @@ SetFeatureCompatibilityVersionCommand ->
+@@ -74,8 +78,9 @@ SetFeatureCompatibilityVersionCommand ->
  SetFeatureCompatibilityVersionCommand -> validateUpgradeRequest [label = "calls"];
  SetFeatureCompatibilityVersionCommand -> FeatureCompatibilityVersionParser;
  SetFeatureCompatibilityVersionCommand -> FeatureCompatibilityVersion;
