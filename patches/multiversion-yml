@@ -2,7 +2,22 @@ Index: SERVER-50758-fcv-refactor-design/fcv_components/fcv_components.gv
 ===================================================================
 --- SERVER-50758-fcv-refactor-design.orig/fcv_components/fcv_components.gv
 +++ SERVER-50758-fcv-refactor-design/fcv_components/fcv_components.gv
-@@ -36,7 +36,7 @@ label = "struct FeatureCompatibilityVers
+@@ -14,6 +14,14 @@ fontsize = "16";
+ labeljust = "left";
+ ];
+ 
++multiversion_constants_yml [
++label = "multiversion_constants.yml\lfeatureCompatibilityVersions\:\l-\ 4.4\l-\ 4.7\l-\ 4.8\l-\ 4.9\llongTermSupportReleases\:\l-\ 4.4\l"
++];
++
++MultiVersionConstants [
++label = "MultiVersionConstants\l-\ featureCompatibilityVersions\l-\ longTermSupportReleases\l"
++];
++
+ FeatureCompatibility [
+ label = "struct ServerGlobalParams\:\:FeatureCompatibility\lenums\:\l-\ kLatest\l-\ kLastContinuous\l-\ kLastLTS\l-\ kUpgradingFromLastLTSToLatest\l-\ kUpgradingFromLastContinuousToLatest\l-\ kDowngradingFromLatestToLastLTS\l-\ kDowngradingFromLatestToLastContinuous\l-\ kUpgradingFromLastLTSToLastContinuous\l-\ _version\l-\ getVersion → enum\l-\ isGreater/LessThanOrEqualTo, etc\l-\ "
+ ];
+@@ -28,7 +36,7 @@ label = "struct FeatureCompatibilityVers
  ];
  
  FeatureCompatibilityVersionParser [
@@ -11,11 +26,20 @@ Index: SERVER-50758-fcv-refactor-design/fcv_components/fcv_components.gv
  ];
  
  FeatureCompatibilityVersion [
-@@ -68,6 +68,7 @@ label = "validateUpgradeRequest"
+@@ -59,6 +67,8 @@ validateUpgradeRequest [
+ label = "validateUpgradeRequest"
  ];
  
- fcv_transitions -> multiversion_constants_idl [label = "generated from"];
-+FeatureCompatibilityVersionParser -> multiversion_constants_idl [label = "uses"];
++MultiVersionConstants -> multiversion_constants_yml [label = "generated from"];
++FeatureCompatibilityVersionParser -> MultiVersionConstants [label = "uses"];
  getFcvDocTargetVersionField -> FeatureCompatibility [label = "uses"];
  getFcvDocVersionField -> FeatureCompatibility [label = "uses"];
  FeatureCompatibility -> FeatureCompatibilityVersionEnum [label = "has a"];
+@@ -72,7 +82,5 @@ SetFeatureCompatibilityVersionCommand ->
+ SetFeatureCompatibilityVersionCommand -> validateUpgradeRequest [label = "calls"];
+ SetFeatureCompatibilityVersionCommand -> FeatureCompatibilityVersionParser;
+ SetFeatureCompatibilityVersionCommand -> FeatureCompatibilityVersion;
+-validateDowngradeRequest -> FeatureCompatibility [label = "uses"];
+-validateUpgradeRequest -> FeatureCompatibility [label = "uses"];
+ FeatureCompatibilityVersionDocument -> fcv_string;
+ };
