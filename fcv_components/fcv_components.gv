@@ -35,12 +35,8 @@ FeatureCompatibilityVersion [
 label = "FeatureCompatibilityVersion\l(convert between document and enum)\l-\ fcvLock\l-\ set/unsetTargetUpgrade/DowngradeFrom: enum → void\l"
 ];
 
-getFcvDocTargetVersionField [
-label = "getFcvDocTargetVersionField → enum"
-];
-
-getFcvDocVersionField [
-label = "getFcvDocVersionField → enum"
+FCVTransitions [
+label = "FCVTransitions\l(tables of transitions and FCV docs)\l-\ permitsTransition: FCV, FCV → bool\l-\ versionFromFCVDoc: FCVDoc → FCV\l-\ getTransitionalVersion: FCV, FCV → FCV\l-\ getFCVDocument: FCV → FCVDoc\l"
 ];
 
 fcv_string [
@@ -51,28 +47,15 @@ SetFeatureCompatibilityVersionCommand [
 label = "SetFeatureCompatibilityVersionCommand"
 ];
 
-validateDowngradeRequest [
-label = "validateDowngradeRequest"
-];
-
-validateUpgradeRequest [
-label = "validateUpgradeRequest"
-];
-
-getFcvDocTargetVersionField -> FeatureCompatibility [label = "uses"];
-getFcvDocVersionField -> FeatureCompatibility [label = "uses"];
 FeatureCompatibility -> FeatureCompatibilityVersionEnum [label = "has a"];
 FeatureCompatibilityVersion -> FeatureCompatibilityVersionEnum [label = "uses"];
 FeatureCompatibilityVersion -> FeatureCompatibilityVersionDocument [label = "uses"];
-FeatureCompatibilityVersion -> getFcvDocVersionField;
-FeatureCompatibilityVersion -> getFcvDocTargetVersionField;
+FeatureCompatibilityVersion -> FeatureCompatibility [label = "uses"];
+FeatureCompatibilityVersion -> FCVTransitions [label = "uses"];
+FCVTransitions -> FeatureCompatibilityVersionEnum [label = "uses"];
 FeatureCompatibilityVersionDocument -> FeatureCompatibilityVersionEnum [label = "uses"];
 fcv_string -> FeatureCompatibilityVersionParser [label = "uses"];
-SetFeatureCompatibilityVersionCommand -> validateDowngradeRequest [label = "calls"];
-SetFeatureCompatibilityVersionCommand -> validateUpgradeRequest [label = "calls"];
-SetFeatureCompatibilityVersionCommand -> FeatureCompatibilityVersionParser;
-SetFeatureCompatibilityVersionCommand -> FeatureCompatibilityVersion;
-validateDowngradeRequest -> FeatureCompatibility [label = "uses"];
-validateUpgradeRequest -> FeatureCompatibility [label = "uses"];
+SetFeatureCompatibilityVersionCommand -> FeatureCompatibilityVersionParser [label = "uses"];
+SetFeatureCompatibilityVersionCommand -> FeatureCompatibilityVersion [label = "uses"];
 FeatureCompatibilityVersionDocument -> fcv_string;
 }
