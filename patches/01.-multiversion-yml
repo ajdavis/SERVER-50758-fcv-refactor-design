@@ -2,22 +2,28 @@ Index: SERVER-50758-fcv-refactor-design/fcv_components/fcv_components.gv
 ===================================================================
 --- SERVER-50758-fcv-refactor-design.orig/fcv_components/fcv_components.gv
 +++ SERVER-50758-fcv-refactor-design/fcv_components/fcv_components.gv
-@@ -14,6 +14,14 @@ fontsize = "16";
+@@ -14,21 +14,24 @@ fontsize = "16";
  labeljust = "left";
  ];
  
+-FeatureCompatibility [
+-label = "struct ServerGlobalParams\:\:FeatureCompatibility\lenums\:\l-\ kLatest\l-\ kLastContinuous\l-\ kLastLTS\l-\ kUpgradingFromLastLTSToLatest\l-\ kUpgradingFromLastContinuousToLatest\l-\ kDowngradingFromLatestToLastLTS\l-\ kDowngradingFromLatestToLastContinuous\l-\ kUpgradingFromLastLTSToLastContinuous\l-\ _version\l-\ getVersion → enum\l-\ isGreater/LessThanOrEqualTo, etc\l"
 +multiversion_constants_yml [
 +label = "multiversion_constants.yml\lfeatureCompatibilityVersions\:\l-\ 4.4\l-\ 4.7\l-\ 4.8\l-\ 4.9\llongTermSupportReleases\:\l-\ 4.4\l"
-+];
-+
-+MultiVersionConstants [
-+label = "MultiVersionConstants\l-\ featureCompatibilityVersions\l-\ longTermSupportReleases\l"
-+];
-+
- FeatureCompatibility [
- label = "struct ServerGlobalParams\:\:FeatureCompatibility\lenums\:\l-\ kLatest\l-\ kLastContinuous\l-\ kLastLTS\l-\ kUpgradingFromLastLTSToLatest\l-\ kUpgradingFromLastContinuousToLatest\l-\ kDowngradingFromLatestToLastLTS\l-\ kDowngradingFromLatestToLastContinuous\l-\ kUpgradingFromLastLTSToLastContinuous\l-\ _version\l-\ getVersion → enum\l-\ isGreater/LessThanOrEqualTo, etc\l"
  ];
-@@ -28,7 +36,7 @@ label = "struct FeatureCompatibilityVers
+ 
+-FeatureCompatibilityVersionEnum [
+-label = "enum ServerGlobalParams\:\:FeatureCompatibility\:\:Version\l-\ kInvalid\l-\ kUnsetDefault44Behavior\l-\ kFullyDowngradedTo44\l-\ kDowngradingFrom47To44\l-\ kDowngradingFrom48To44\l-\ kUpgradingFrom44To47\l-\ kUpgradingFrom44To48\l-\ kVersion47\l-\ kDowngradingFrom48To47\l-\ kUpgradingFrom47To48\l-\ kVersion48\l"
++multiversion_constants_gen [
++label = "multiversion_constants_gen\l-\ kFeatureCompatibilityVersions\l-\ kNumberOfReleasesSince44\l-\ FCV\l-\ kFCVStrings\l\ GenericFCV\l"
+ ];
+ 
++FeatureCompatibility [
++label = "struct ServerGlobalParams\:\:getVersion → enum\l"
++];
+ 
+ FeatureCompatibilityVersionDocument [
+ label = "struct FeatureCompatibilityVersionDocument (from IDL)\l-\ _id\l-\ version\l-\ targetVersion\l-\ previousVersion\l"
  ];
  
  FeatureCompatibilityVersionParser [
@@ -26,20 +32,24 @@ Index: SERVER-50758-fcv-refactor-design/fcv_components/fcv_components.gv
  ];
  
  FeatureCompatibilityVersion [
-@@ -59,6 +67,8 @@ validateUpgradeRequest [
- label = "validateUpgradeRequest"
+@@ -47,14 +50,16 @@ SetFeatureCompatibilityVersionCommand [
+ label = "SetFeatureCompatibilityVersionCommand"
  ];
  
-+MultiVersionConstants -> multiversion_constants_yml [label = "generated from"];
-+FeatureCompatibilityVersionParser -> MultiVersionConstants [label = "uses"];
- getFcvDocTargetVersionField -> FeatureCompatibility [label = "uses"];
- getFcvDocVersionField -> FeatureCompatibility [label = "uses"];
- FeatureCompatibility -> FeatureCompatibilityVersionEnum [label = "has a"];
-@@ -72,7 +82,5 @@ SetFeatureCompatibilityVersionCommand ->
- SetFeatureCompatibilityVersionCommand -> validateUpgradeRequest [label = "calls"];
- SetFeatureCompatibilityVersionCommand -> FeatureCompatibilityVersionParser;
- SetFeatureCompatibilityVersionCommand -> FeatureCompatibilityVersion;
--validateDowngradeRequest -> FeatureCompatibility [label = "uses"];
--validateUpgradeRequest -> FeatureCompatibility [label = "uses"];
+-FeatureCompatibility -> FeatureCompatibilityVersionEnum [label = "has a"];
+-FeatureCompatibilityVersion -> FeatureCompatibilityVersionEnum [label = "uses"];
++multiversion_constants_gen -> multiversion_constants_yml [label = "generated from"];
++FeatureCompatibility -> multiversion_constants_gen [label = "has a"];
++FeatureCompatibilityVersion -> multiversion_constants_gen [label = "uses"];
+ FeatureCompatibilityVersion -> FeatureCompatibilityVersionDocument [label = "uses"];
+ FeatureCompatibilityVersion -> FeatureCompatibility [label = "uses"];
+ FeatureCompatibilityVersion -> FCVTransitions [label = "uses"];
+-FCVTransitions -> FeatureCompatibilityVersionEnum [label = "uses"];
+-FeatureCompatibilityVersionDocument -> FeatureCompatibilityVersionEnum [label = "uses"];
++FCVTransitions -> multiversion_constants_gen [label = "uses"];
++FeatureCompatibilityVersionDocument -> multiversion_constants_gen [label = "uses"];
+ fcv_string -> FeatureCompatibilityVersionParser [label = "uses"];
++FeatureCompatibilityVersionParser -> multiversion_constants_gen [label = "uses"];
+ SetFeatureCompatibilityVersionCommand -> FeatureCompatibilityVersionParser [label = "uses"];
+ SetFeatureCompatibilityVersionCommand -> FeatureCompatibilityVersion [label = "uses"];
  FeatureCompatibilityVersionDocument -> fcv_string;
- }

@@ -1,0 +1,21 @@
+Index: SERVER-50758-fcv-refactor-design/fcv_components/fcv_components.gv
+===================================================================
+--- SERVER-50758-fcv-refactor-design.orig/fcv_components/fcv_components.gv
++++ SERVER-50758-fcv-refactor-design/fcv_components/fcv_components.gv
+@@ -22,6 +22,10 @@ multiversion_constants_gen [
+ label = "multiversion_constants_gen\l-\ kFeatureCompatibilityVersions\l-\ kNumberOfReleasesSince44\l-\ FCV\l-\ kFCVStrings\l\ GenericFCV\l"
+ ];
+ 
++wireVersion [
++label = "wire versions";
++];
++
+ FeatureCompatibility [
+ label = "struct ServerGlobalParams\:\:getVersion → enum\l"
+ ];
+@@ -63,4 +67,5 @@ FeatureCompatibilityVersionParser -> mul
+ SetFeatureCompatibilityVersionCommand -> FeatureCompatibilityVersionParser [label = "uses"];
+ SetFeatureCompatibilityVersionCommand -> FeatureCompatibilityVersion [label = "uses"];
+ FeatureCompatibilityVersionDocument -> fcv_string;
++wireVersion -> multiversion_constants_gen [label = "uses"];
+ }
