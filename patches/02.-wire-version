@@ -3,7 +3,7 @@ Index: SERVER-50758-fcv-refactor-design/fcv_components/fcv_components.gv
 --- SERVER-50758-fcv-refactor-design.orig/fcv_components/fcv_components.gv
 +++ SERVER-50758-fcv-refactor-design/fcv_components/fcv_components.gv
 @@ -22,6 +22,10 @@ multiversion_constants_gen [
- label = "multiversion_constants_gen\l-\ kFeatureCompatibilityVersions\l-\ kNumberOfReleasesSince44\l-\ FCV\l-\ kFCVStrings\l\ GenericFCV\l"
+ label = "multiversion_constants_gen\l-\ kFeatureCompatibilityVersions\l-\ kNumberOfReleasesSince44\l-\ FCV\l-\ kFCVStrings\l\- GenericFCV\l"
  ];
  
 +wireVersion [

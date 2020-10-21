@@ -15,7 +15,7 @@ Index: SERVER-50758-fcv-refactor-design/fcv_components/fcv_components.gv
 -FeatureCompatibilityVersionEnum [
 -label = "enum ServerGlobalParams\:\:FeatureCompatibility\:\:Version\l-\ kInvalid\l-\ kUnsetDefault44Behavior\l-\ kFullyDowngradedTo44\l-\ kDowngradingFrom47To44\l-\ kDowngradingFrom48To44\l-\ kUpgradingFrom44To47\l-\ kUpgradingFrom44To48\l-\ kVersion47\l-\ kDowngradingFrom48To47\l-\ kUpgradingFrom47To48\l-\ kVersion48\l"
 +multiversion_constants_gen [
-+label = "multiversion_constants_gen\l-\ kFeatureCompatibilityVersions\l-\ kNumberOfReleasesSince44\l-\ FCV\l-\ kFCVStrings\l\ GenericFCV\l"
++label = "multiversion_constants_gen\l-\ kFeatureCompatibilityVersions\l-\ kNumberOfReleasesSince44\l-\ FCV\l-\ kFCVStrings\l\- GenericFCV\l"
  ];
  
 +FeatureCompatibility [
@@ -32,6 +32,15 @@ Index: SERVER-50758-fcv-refactor-design/fcv_components/fcv_components.gv
  ];
  
  FeatureCompatibilityVersion [
+@@ -36,7 +39,7 @@ label = "FeatureCompatibilityVersion\l(c
+ ];
+ 
+ FCVTransitions [
+-label = "FCVTransitions\l(tables of transitions and FCV docs)\l-\ permitsTransition: FCV, FCV → bool\l-\ versionFromFCVDoc: FCVDoc → FCV\l-\ getTransitionalVersion: FCV, FCV → FCV\l-\ getFCVDocument: FCV → FCVDoc\l"
++label = "FCVTransitions\l(tables of transitions and FCV docs)\l-\ permitsTransition: GenericFCV, GenericFCV → bool\l-\ versionFromFCVDoc: FCVDoc → GenericFCV\l-\ getTransitionalVersion: GenericFCV, GenericFCV → GenericFCV\l-\ getFCVDocument: GenericFCV → FCVDoc\l"
+ ];
+ 
+ fcv_string [
 @@ -47,14 +50,16 @@ SetFeatureCompatibilityVersionCommand [
  label = "SetFeatureCompatibilityVersionCommand"
  ];
